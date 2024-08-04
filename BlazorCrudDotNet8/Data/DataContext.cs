@@ -1,5 +1,5 @@
+using BlazorCrudDotNet8.Entities;
 using Microsoft.EntityFrameworkCore;
-using BlazorCrudDotNet8.BusinessLogic.Entities;
 
 namespace BlazorCrudDotNet8.Data;
 
