@@ -1,9 +1,9 @@
-using BlazorCrudDotNet8.Data;
-using BlazorCrudDotNet8.Entities;
-using BlazorCrudDotNet8.Services.Interfaces;
+using BlazorCrudDotNet8.BusinessLogic.Data;
+using BlazorCrudDotNet8.BusinessLogic.Entities;
+using BlazorCrudDotNet8.BusinessLogic.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlazorCrudDotNet8.Services;
+namespace BlazorCrudDotNet8.BusinessLogic.Services;
 
 public class GameService(DataContext context) : IGameService
 {

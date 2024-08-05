@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using BlazorCrudDotNet8.Components;
-using BlazorCrudDotNet8.Data;
-using BlazorCrudDotNet8.Services;
-using BlazorCrudDotNet8.Services.Interfaces;
+using BlazorCrudDotNet8.BusinessLogic.Data;
+using BlazorCrudDotNet8.BusinessLogic.Services;
+using BlazorCrudDotNet8.BusinessLogic.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +11,16 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddControllers();
+
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+builder.Services.AddScoped(http => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration.GetSection("BaseUri").Value!),
+});
 builder.Services.AddScoped<IGameService, GameService>();
 
 var app = builder.Build();
@@ -32,6 +38,8 @@ else
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
