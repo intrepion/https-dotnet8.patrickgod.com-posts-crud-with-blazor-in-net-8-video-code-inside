@@ -1,6 +1,6 @@
 @page "/games"
 @inject IGameService GameService
-@attribute [StreamRendering]
+@attribute [StreamRendering(true)]
 
 <h3>GameList</h3>
 
@@ -21,6 +21,7 @@ else
         }
     </ul>
 }
+<CreateGameButton />
 
 @code {
     List<Game>? games = null;
@@ -29,4 +30,5 @@ else
     {
         games = await GameService.GetAllGames();
     }
+
 }
